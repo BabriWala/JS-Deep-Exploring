@@ -56,3 +56,52 @@ Object.defineProperty(user3, "name",{
 // Same Above Code
 user3.name = "Sakib";
 console.log(user3)
+
+
+let user4 = {
+    name: "John",
+    toString() {
+      return this.name;
+    }
+  };
+  
+  // By default, both our properties are listed:
+  for (let key in user4) console.log(key); // name, toString
+
+Object.defineProperty(user4, "toString", {
+    enumerable: false,
+})
+
+for (let key in user4) console.log(key); // name
+// now will show just name
+
+// Non-enumerable properties are also excluded from Object.keys:
+
+console.log(Object.keys(user4)); // name
+
+
+// Non-configurable
+
+// The non-configurable flag (configurable:false) is sometimes preset for built-in objects and properties.
+
+// A non-configurable property can’t be deleted, its attributes can’t be modified.
+
+// For instance, Math.PI is non-writable, non-enumerable and non-configurable:
+
+console.log(Object.getOwnPropertyDescriptor(Math, 'PI'))
+Math.PI = 3; // Error, because it has writable: false
+
+// delete Math.PI won't work either
+
+// Error, because of configurable: false
+Object.defineProperty(Math, "PI", { configurable: true, writable: true });
+Math.PI = 3; 
+// console.log(Math.PI)
+
+// There’s absolutely nothing we can do with Math.PI.
+
+// Making a property non-configurable is a one-way road. We cannot change it back with defineProperty.
+
+// Please note: configurable: false prevents changes of property flags and its deletion, while allowing to change its value.
+
+// Here user.name is non-configurable, but we can still change it (as it’s writable):
