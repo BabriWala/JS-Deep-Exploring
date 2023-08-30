@@ -35,3 +35,24 @@ let descriptor2 = Object.defineProperty(user2, "name",{
 
 console.log(user2)
 console.log(Object.getOwnPropertyDescriptor(user2, "name"))
+
+// In Strict Mode It will Give us and Error
+// But it still not working in non-strict mode
+Object.defineProperty(user, "name",{
+    writable: false
+})
+
+user.name = "Sallu Khan";
+console.log(user)
+
+
+let user3 = {};
+
+Object.defineProperty(user3, "name",{
+    value: "Mushfiq",
+    enumerable: true,
+    configurable: true
+})
+// Same Above Code
+user3.name = "Sakib";
+console.log(user3)
